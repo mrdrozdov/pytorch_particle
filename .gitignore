@@ -3,4 +3,5 @@ __pycache__
 .coverage
 dist
 *.egg-info
+particle-data-cache
 

@@ -38,6 +38,6 @@ class ChartBatch(object):
         batch.node_feat = torch.cat([el.node_feat for el in chart_list], 0)
         batch.batch_size = len(chart_list)
         batch.lengths = torch.tensor([el.length for el in chart_list], dtype=torch.long)
-        batch.chart_sizes = torch.tensor([el.node_feat.shape for el in chart_list], dtype=torch.long)
-        batch.offsets = batch.chart_sizes.cumsum(0) - batch.chart_sizes[0]
+        batch.chart_sizes = torch.tensor([el.node_feat.shape[0] for el in chart_list], dtype=torch.long)
+        batch.offsets = torch.tensor([0] + batch.chart_sizes[:-1].cumsum(0).tolist(), dtype=torch.long)
         return batch
